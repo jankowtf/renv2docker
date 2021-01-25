@@ -178,8 +178,8 @@ test_that(".Env: renv activation script", {
   expect_identical(result, target)
 })
 
-test_that(".Env: renv manifest", {
-  result <- .env_renv_manifest()
+test_that(".Env: renv lockfile", {
+  result <- .env_renv_lockfile()
 
   target <- "renv.lock" %>%
     fs::path()
@@ -187,8 +187,8 @@ test_that(".Env: renv manifest", {
   expect_identical(result, target)
 })
 
-test_that(".Env: cached renv manifest", {
-  result <- .env_renv_manifest_cached()
+test_that(".Env: cached renv lockfile", {
+  result <- .env_renv_lockfile_cached()
 
   target <- "renv/renv.lock" %>%
     fs::path()

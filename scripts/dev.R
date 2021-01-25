@@ -2,6 +2,7 @@ usethis::use_package("magrittr")
 usethis::use_package("pkgload")
 usethis::use_package("renv")
 usethis::use_package("stringr")
+usethis::use_package("devtools")
 
 # Tests -------------------------------------------------------------------
 

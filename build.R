@@ -61,11 +61,11 @@ build_into_renv_local()
 
 renv_snapshot()
 
-# Manage cached {renv} manifest -------------------------------------------
+# Manage cached {renv} lockfile -------------------------------------------
 
-renv_manage_cached_manifest()
+renv_manage_cached_lockfile()
 
-renv_add_manifest_record()
+renv_add_lockfile_record()
 
 # Preps for Docker --------------------------------------------------------
 

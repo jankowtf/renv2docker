@@ -66,29 +66,29 @@ renv_snapshot <- function() {
   renv::snapshot(confirm = FALSE)
 }
 
-#' Get hash of `{renv}` manifest
+#' Get hash of `{renv}` lockfile
 #'
 #' @return
 #' @export
 #'
 #' @examples
-renv_digest_primary_manifest <- function() {
+renv_digest_primary_lockfile <- function() {
   digest::digest(
     readLines(
-      .env_renv_manifest() %>%
+      .env_renv_lockfile() %>%
         here::here()
     )
   )
 }
 
-#' Digest cached `{renv}` manifest
+#' Digest cached `{renv}` lockfile
 #'
 #' @return
 #' @export
 #'
 #' @examples
-renv_digest_cached_manifest <- function() {
-  path <- .env_renv_manifest_cached() %>%
+renv_digest_cached_lockfile <- function() {
+  path <- .env_renv_lockfile_cached() %>%
     here::here()
 
   if (file.exists(path)) {
@@ -98,49 +98,49 @@ renv_digest_cached_manifest <- function() {
   }
 }
 
-#' Manage cached `{renv}` manifest
+#' Manage cached `{renv}` lockfile
 #'
 #' @param key_primary
 #' @param key_cached
 #' @param force
 #'
-#' @return Path to ached `{renv}` manifest
+#' @return Path to ached `{renv}` lockfile
 #' @export
 #'
 #' @examples
-#' renv_manage_cached_manifest()
-renv_manage_cached_manifest <- function(
-  key_primary = renv_digest_primary_manifest(),
-  key_cached = renv_digest_cached_manifest(),
+#' renv_manage_cached_lockfile()
+renv_manage_cached_lockfile <- function(
+  key_primary = renv_digest_primary_lockfile(),
+  key_cached = renv_digest_cached_lockfile(),
   force = FALSE
 ) {
   if (key_primary != key_cached ||
       force
   ) {
-    usethis::ui_info("Updating cached manifest ({.env_renv_manifest_cached()})")
+    usethis::ui_info("Updating cached lockfile ({.env_renv_lockfile_cached()})")
     fs::file_copy(
-      .env_renv_manifest() %>%
+      .env_renv_lockfile() %>%
         here::here(),
-      .env_renv_manifest_cached() %>%
+      .env_renv_lockfile_cached() %>%
         here::here(),
       overwrite = TRUE
     )
-    usethis::ui_done("Cached manifest updated ({.env_renv_manifest_cached()})")
+    usethis::ui_done("Cached lockfile updated ({.env_renv_lockfile_cached()})")
   } else {
-    usethis::ui_done("Cached manifest up to date ({.env_renv_manifest_cached()})")
+    usethis::ui_done("Cached lockfile up to date ({.env_renv_lockfile_cached()})")
   }
 
-  .env_renv_manifest_cached()
+  .env_renv_lockfile_cached()
 }
 
-#' Add `{renv}` manifest record for current package
+#' Add `{renv}` lockfile record for current package
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#' renv_add_manifest_record()
-renv_add_manifest_record <- function() {
+#' renv_add_lockfile_record()
+renv_add_lockfile_record <- function() {
   package_name <- env_package_name()
   record <- list(list(
     Package = package_name,

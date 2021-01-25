@@ -128,29 +128,29 @@ env_renv_version <- function() {
     fs::path("activate.R")
 }
 
-#' Internal environment variable: renv manifest
+#' Internal environment variable: renv lockfile
 #'
 #' Exists for single-source-of-truth encapsulation of internal settings for
-#' `{renv}` manifest
+#' `{renv}` lockfile
 #'
 #' @return
 #'
 #' @examples
-.env_renv_manifest <- function() {
+.env_renv_lockfile <- function() {
   "renv.lock" %>%
     fs::path()
 }
 
-#' Internal environment variable: cached renv manifest
+#' Internal environment variable: cached renv lockfile
 #'
 #' Exists for single-source-of-truth encapsulation of internal settings for
-#' `{renv}` manifest
+#' `{renv}` lockfile
 #'
 #' @return
 #'
 #' @examples
-.env_renv_manifest_cached <- function() {
-  "renv/{.env_renv_manifest()}" %>%
+.env_renv_lockfile_cached <- function() {
+  "renv/{.env_renv_lockfile()}" %>%
     stringr::str_glue() %>%
     fs::path()
 }
