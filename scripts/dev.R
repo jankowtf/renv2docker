@@ -1,12 +1,20 @@
+# Dependencies ------------------------------------------------------------
+
+# --- Dev
+renv::install("rappster/renvx")
+
 usethis::use_package("magrittr")
 usethis::use_package("pkgload")
 usethis::use_package("renv")
 usethis::use_package("stringr")
 usethis::use_package("devtools")
+usethis::use_package("here")
+renv::install("pkgload")
+usethis::use_package("pkgload")
 
 # Tests -------------------------------------------------------------------
 
 usethis::use_test("env")
 usethis::use_test("ensure")
 usethis::use_test("renv")
-usethis::use_test("io")
+usethis::use_test("templates")

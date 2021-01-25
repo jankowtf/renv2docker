@@ -55,10 +55,13 @@ write_env_vars <- function(
   # Compose
   package_name <- env_package_name()
   package_version <- env_package_version()
-  dependency_manager_name <- env_dependency_manager_name()
+  package_maintainer <- env_package_maintainer()
+  package_port <- env_package_port()
 
   r_version <- env_r_version()
   renv_version <- env_renv_version()
+
+  dependency_manager_name <- env_dependency_manager_name()
 
   # Trying to set env vars directly
   # Doesn't work as they are not visible for other bash processes
@@ -68,6 +71,9 @@ write_env_vars <- function(
   ret <- list()
   ret$package_name <- package_name %>% write_env_var(dir = dir)
   ret$package_version <- package_version %>% write_env_var(dir = dir)
+  ret$package_maintainer <- package_maintainer %>% write_env_var(dir = dir)
+  ret$package_port <- package_port %>% write_env_var(dir = dir)
+
   ret$dependency_manager_name <- dependency_manager_name %>% write_env_var(dir = dir)
 
   ret$r_version <- r_version %>% write_env_var(dir = dir)

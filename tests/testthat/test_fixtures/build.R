@@ -1,6 +1,7 @@
 # Dependencies ------------------------------------------------------------
 
-devtools::load_all(here::here())
+library(renv2docker)
+# devtools::load_all(here::here())
 
 # Manage renv cache -------------------------------------------------------
 
@@ -69,5 +70,3 @@ renv_add_lockfile_record()
 # Preps for Docker --------------------------------------------------------
 
 renv_ensure_cache_docker_dir()
-
-renv_copy_description()

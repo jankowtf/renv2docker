@@ -23,6 +23,40 @@ env_package_version <- function() {
     as.character()
 }
 
+#' Environment variable value: package maintainer
+#'
+#' @return
+#' @importFrom pkgload pkg_version
+#' @export
+#'
+#' @examples
+#' env_package_maintainer()
+env_package_maintainer <- function() {
+  usethis:::project_data() %>%
+      purrr::pluck("Authors@R") %>%
+      rlang::parse_expr() %>%
+      rlang::eval_tidy() %>%
+      as.character() %>%
+      stringr::str_replace("<", "(") %>%
+      stringr::str_replace(">", ")")
+}
+
+#' Environment variable value: package port
+#'
+#' @param port [[integer]] Port
+#'
+#' @return
+#' @importFrom pkgload pkg_version
+#' @export
+#'
+#' @examples
+#' env_package_port()
+env_package_port <- function(
+  port = 8000
+) {
+  port
+}
+
 #' Environment variable value: dependency manager name
 #'
 #' @return

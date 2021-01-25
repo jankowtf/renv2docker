@@ -8,3 +8,15 @@
 ^cran-comments\.md$
 ^\.github$
 ^data$
+^build\.R$
+^tests/testthat/test_fixtures/build\.R$
+^test_fixtures/build\.R$
+^tests/testthat/test_fixtures/Dockerfile$
+^tests/testthat/test_fixtures/Dockerfile_dep_manager$
+^tests/testthat/test_fixtures/renv/Dockerfile$
+^/media/janko/Shared/Code/R/Packages/renv2docker/renv/Dockerfile$
+^/media/janko/Shared/Code/R/Packages/renv2docker/Dockerfile$
+^/media/janko/Shared/Code/R/Packages/renv2docker/docker_build\.sh$
+^/media/janko/Shared/Code/R/Packages/renv2docker/docker_run\.sh$
+^test_fixtures/Dockerfile$
+^test_fixtures/renv/Dockerfile$

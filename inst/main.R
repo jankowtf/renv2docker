@@ -9,9 +9,10 @@ source("renv/activate.R")
 # Start API server --------------------------------------------------------
 
 counter <- 1
-counter_max <- 10
+counter_max <- 5
 
 while (counter <= counter_max) {
   message(Sys.time())
   Sys.sleep(10)
+  counter <- counter + 1
 }

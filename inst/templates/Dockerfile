@@ -45,7 +45,7 @@ COPY renv/local renv/local
 COPY renv/activate.R  renv/activate.R
 
 COPY DESCRIPTION_OUTER DESCRIPTION
-COPY inst/main.R main.R
+COPY inst/{{r_script}} {{r_script}}
 # COPY .Rprofile .Rprofile
 
 # Restore dependencies from cache ----------
@@ -56,4 +56,4 @@ RUN R \
   -e 'renv::restore()'
 
 # Serve microservice via API ----------
-CMD Rscript 'main.R'
+CMD Rscript '{{r_script}}'

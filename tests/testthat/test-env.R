@@ -1,62 +1,77 @@
 # Package name ------------------------------------------------------------
 
 test_that("Package name", {
-  result <- env_package_name()
+  actual <- env_package_name()
 
-  target <- pkgload::pkg_name()
+  expected <- pkgload::pkg_name()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 # Package version ---------------------------------------------------------
 
 test_that("Package version", {
-  result <- env_package_version()
-
-  target <- pkgload::pkg_version() %>% as.character()
-
-  expect_identical(result, target)
+  actual <- env_package_version()
+  expected <- pkgload::pkg_version() %>% as.character()
+  expect_identical(actual, expected)
 })
+
+# Package maintainer ------------------------------------------------------
+
+test_that("Package maintainer", {
+  actual <- env_package_maintainer()
+  expected <- "Janko Thyson (janko.thyson@rappster.io) [aut, cre]"
+  expect_identical(actual, expected)
+})
+
+# Package port ------------------------------------------------------------
+
+test_that("Package port", {
+  actual <- env_package_port()
+  expected <- 8000
+  expect_identical(actual, expected)
+})
+
 
 # Dependency manager name -------------------------------------------------
 
 test_that("Dependency manager name", {
-  result <- env_dependency_manager_name()
+  actual <- env_dependency_manager_name()
 
-  target <- "{env_package_name()}_deps" %>%
+  expected <- "{env_package_name()}_deps" %>%
     stringr::str_glue() %>%
     as.character()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 # R version ---------------------------------------------------------------
 
 test_that("R version", {
-  result <- env_r_version()
+  actual <- env_r_version()
 
-  target <- stringr::str_c(R.version$major, ".", R.version$minor) %>%
+  expected <- stringr::str_c(R.version$major, ".", R.version$minor) %>%
     as.character()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 # {renv} version ----------------------------------------------------------
 
 test_that("{renv} version", {
-  result <- env_renv_version()
+  actual <- env_renv_version()
 
-  target <- packageVersion("renv") %>%
+  expected <- packageVersion("renv") %>%
     as.character()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 # Write -------------------------------------------------------------------
 
 test_that("Write env vars to file", {
-  result <- write_env_vars()
-  expectation <- list(
+  actual <- write_env_vars()
+  expected <- list(
     package_name = structure(
       "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_name",
       class = c("fs_path",
@@ -64,6 +79,16 @@ test_that("Write env vars to file", {
     ),
     package_version = structure(
       "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_version",
+      class = c("fs_path",
+        "character")
+    ),
+    package_maintainer = structure(
+      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_maintainer",
+      class = c("fs_path",
+        "character")
+    ),
+    package_port = structure(
+      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_port",
       class = c("fs_path",
         "character")
     ),
@@ -83,16 +108,16 @@ test_that("Write env vars to file", {
         "character")
     )
   )
-  expect_identical(result, expectation)
+  expect_identical(actual, expected)
 
   # Check for file existance
-  files_exist <- result %>% purrr::map_lgl(fs::file_exists)
+  files_exist <- actual %>% purrr::map_lgl(fs::file_exists)
   expect_true(all(files_exist))
 })
 
 test_that("Write env vars to file: alternative dir", {
-  result <- write_env_vars(dir = test_path("test_fixtures"))
-  expectation <- list(
+  actual <- write_env_vars(dir = test_path("test_fixtures"))
+  expected <- list(
     package_name = structure(
       r"({test_path("test_fixtures")}/.docker_env_package_name)" %>%
         stringr::str_glue(),
@@ -101,6 +126,18 @@ test_that("Write env vars to file: alternative dir", {
     ),
     package_version = structure(
       r"({test_path("test_fixtures")}/.docker_env_package_version)" %>%
+        stringr::str_glue(),
+      class = c("fs_path",
+        "character")
+    ),
+    package_maintainer = structure(
+      r"({test_path("test_fixtures")}/.docker_env_package_maintainer)" %>%
+        stringr::str_glue(),
+      class = c("fs_path",
+        "character")
+    ),
+    package_port = structure(
+      r"({test_path("test_fixtures")}/.docker_env_package_port)" %>%
         stringr::str_glue(),
       class = c("fs_path",
         "character")
@@ -124,74 +161,74 @@ test_that("Write env vars to file: alternative dir", {
         "character")
     )
   )
-  expect_identical(result, expectation)
+  expect_identical(actual, expected)
 
   # Check for file existance
-  files_exist <- result %>% purrr::map_lgl(fs::file_exists)
+  files_exist <- actual %>% purrr::map_lgl(fs::file_exists)
   expect_true(all(files_exist))
 })
 
 # Internal ----------------------------------------------------------------
 
 test_that(".Env: renv dir", {
-  result <- .env_dir_renv()
+  actual <- .env_dir_renv()
 
-  target <- "renv" %>%
+  expected <- "renv" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 test_that(".Env: renv dir for package build", {
-  result <- .env_dir_renv_local()
+  actual <- .env_dir_renv_local()
 
-  target <- "renv/local" %>%
+  expected <- "renv/local" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 test_that(".Env: renv dir for docker cache", {
-  result <- .env_dir_renv_cache()
+  actual <- .env_dir_renv_cache()
 
-  target <- "renv/cache" %>%
+  expected <- "renv/cache" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 test_that(".Env: renv dir for docker cache", {
-  result <- .env_dir_renv_cache_docker()
+  actual <- .env_dir_renv_cache_docker()
 
-  target <- "renv/cache_docker" %>%
+  expected <- "renv/cache_docker" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 test_that(".Env: renv activation script", {
-  result <- .env_renv_activate()
+  actual <- .env_renv_activate()
 
-  target <- "renv/activate.R" %>%
+  expected <- "renv/activate.R" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 test_that(".Env: renv lockfile", {
-  result <- .env_renv_lockfile()
+  actual <- .env_renv_lockfile()
 
-  target <- "renv.lock" %>%
+  expected <- "renv.lock" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })
 
 test_that(".Env: cached renv lockfile", {
-  result <- .env_renv_lockfile_cached()
+  actual <- .env_renv_lockfile_cached()
 
-  target <- "renv/renv.lock" %>%
+  expected <- "renv/renv.lock" %>%
     fs::path()
 
-  expect_identical(result, target)
+  expect_identical(actual, expected)
 })

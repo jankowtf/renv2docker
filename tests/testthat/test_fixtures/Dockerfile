@@ -2,19 +2,16 @@
 # Overall: https://cran.r-project.org/web/packages/renv/vignettes/docker.html
 # Handling local sources: https://rstudio.github.io/renv/articles/local-sources.html
 # Ignoring dev dependencies: https://rstudio.github.io/renv/articles/faq.html
-# ARG for FROM: https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 
-ARG  R_VERSION
-FROM rocker/r-ver:$R_VERSION
+#FROM r-base
+FROM rocker/r-ver:4.0.3
 
-ARG R_PACKAGE_NAME
-ARG R_PACKAGE_VERSION
-ARG R_PACKAGE_MAINTAINER
-
-LABEL version=$R_PACKAGE_VERSION
-LABEL maintainer=$R_PACKAGE_MAINTAINER
+LABEL version=0.0.0.9004
+LABEL maintainer=Janko Thyson &lt;janko.thyson@rappster.io&gt; [aut, cre]
 
 # Install Linux libs ----------
+#RUN apt-get update && apt-get install -y libsasl2-dev libssl-dev libcurl4 libcurl4-openssl-dev libxml2-dev libsodium-dev
+#RUN apt-get update && apt-get dist-upgrade -y --force-yes && apt-get autoremove && apt-get autoclean && apt-get install -y --force-yes -f libsasl2-dev libssl-dev libcurl4 libcurl4-openssl-dev libxml2-dev libsodium-dev
 RUN apt-get update && \
   apt-get autoremove && \
   apt-get autoclean && \

@@ -1,18 +1,24 @@
-Type: Package
-Package: renv2docker.container
-Title: Testing {renv} integration in Docker workflows
-Version: 0.0.0.9001
-Authors@R: person("Janko", "Thyson", email = "janko.thyson@rappster.io",
-                  role = c("aut", "cre"))
-Description: Testing {renv} integration in Docker workflows
-    delivery times
+Package: renv2docker
+Title: Enhanced {renv} integration for Docker workflows
+Version: 0.0.0.9004
+Authors@R: 
+    person(given = "Janko",
+           family = "Thyson",
+           role = c("aut", "cre"),
+           email = "janko.thyson@rappster.io")
+Description: Facilitates a two-step build process that encapsulates the 
+    package dependencies in a distinct image/container for cache management.
 License: MIT + file LICENSE
-Imports:
-    magrittr,
-    here
-RdMacros:
-    lifecycle
+Suggests: 
+    testthat
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
+Imports: 
+    pkgload,
+    renv,
+    stringr,
+    magrittr,
+    devtools,
+    here

@@ -145,7 +145,7 @@ renv_add_lockfile_record <- function() {
   record <- list(list(
     Package = package_name,
     Version = env_package_version(),
-    Source = "Filesystem"
+    Source = "Local"
   ))
   names(record) <- package_name
   renv::record(record)
@@ -172,4 +172,19 @@ renv_remove_dev_package <- function() {
 #' @examples
 renv_set_env_var_cache <- function() {
   Sys.setenv(RENV_PATHS_CACHE = .env_dir_renv_cache() %>% here::here())
+}
+
+#' Ensure directory exists and is empty
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' renv_ensure_local_dir()
+renv_copy_description <- function() {
+  fs::file_copy(
+    "DESCRIPTION",
+    "DESCRIPTION_OUTER",
+    overwrite = TRUE
+  )
 }

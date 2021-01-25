@@ -32,7 +32,7 @@ install.packages("renv2docker")
 
 ## Usage
 
-```{r example}
+```{r example, eval=FALSE}
 library(renv2docker)
 ## basic example code
 ```

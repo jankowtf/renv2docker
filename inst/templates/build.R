@@ -1,6 +1,7 @@
 # Dependencies ------------------------------------------------------------
 
-devtools::load_all(here::here())
+library({{package}})
+# devtools::load_all(here::here())
 
 # Manage renv cache -------------------------------------------------------
 

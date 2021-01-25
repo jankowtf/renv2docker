@@ -3,8 +3,8 @@
     "Version": "4.0.3",
     "Repositories": [
       {
-        "Name": "CRAN",
-        "URL": "https://cloud.r-project.org"
+        "Name": "RSPM",
+        "URL": "https://packagemanager.rstudio.com/all/latest"
       }
     ]
   },
@@ -181,7 +181,7 @@
       "Package": "fs",
       "Version": "1.5.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "44594a07a42e5f91fac9f93fda6d0109"
     },
     "gh": {
@@ -424,8 +424,20 @@
     },
     "renv2docker": {
       "Package": "renv2docker",
-      "Version": "0.0.0.9001",
-      "Source": "Filesystem"
+      "Version": "0.0.0.9004",
+      "Source": "Local"
+    },
+    "renvx": {
+      "Package": "renvx",
+      "Version": "0.0.0.9003",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rappster",
+      "RemoteRepo": "renvx",
+      "RemoteRef": "main",
+      "RemoteSha": "14f7c714a4133ba820aecf594cf130b12e26a98c",
+      "Hash": "183eb674e48762a4a1c6e99fc5c6f41a"
     },
     "rex": {
       "Package": "rex",
