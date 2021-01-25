@@ -7,8 +7,8 @@
 #' @param file_name [[character]] Optional file name. If none is provided then
 #'   `.docker_env_{function_name}` is use with `function_name` being the name of
 #'   the function that called this function (e.g. [env_package_name]).
-#' @return
-#' @export [[character]] File path
+#' @return [[character]] File path
+#' @export
 #'
 #' @examples
 write_env_var <- function(

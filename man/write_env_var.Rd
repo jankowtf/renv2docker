@@ -18,7 +18,7 @@ written to. Defaults to root directory of your package/project (via
 the function that called this function (e.g. \link{env_package_name}).}
 }
 \value{
-
+[\link{character}] File path
 }
 \description{
 Write environment variable to file

@@ -1,7 +1,7 @@
 Type: Package
 Package: renv2docker.container
 Title: Testing {renv} integration in Docker workflows
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: person("Janko", "Thyson", email = "janko.thyson@rappster.io",
                   role = c("aut", "cre"))
 Description: Testing {renv} integration in Docker workflows

@@ -30,9 +30,7 @@ You can install the released version of renv2docker from [CRAN](https://CRAN.R-p
 install.packages("renv2docker")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Usage
 
 ```{r example}
 library(renv2docker)
@@ -49,3 +47,8 @@ library(renv2docker)
 ### RStudio package manager public (RSPM)
 - https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-Public-RStudio-Package-Manager
 - https://packagemanager.rstudio.com/client/#/repos/1/overview
+
+## TODOs
+
+- Add functionality to add `renv/cache/` and `renv/cache_docker/` to
+`.gitignore`
