@@ -4,11 +4,17 @@
 \alias{renv_digest_primary_lockfile}
 \title{Get hash of \code{{renv}} lockfile}
 \usage{
-renv_digest_primary_lockfile()
+renv_digest_primary_lockfile(path = .env_renv_lockfile())
+}
+\arguments{
+\item{path}{[\link{character}] Path to \code{renv.lock}}
 }
 \value{
 
 }
 \description{
 Get hash of \code{{renv}} lockfile
+}
+\examples{
+renv_digest_primary_lockfile()
 }

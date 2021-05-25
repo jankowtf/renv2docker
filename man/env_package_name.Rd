@@ -2,15 +2,15 @@
 % Please edit documentation in R/env.R
 \name{env_package_name}
 \alias{env_package_name}
-\title{Environment variable value: package name}
+\title{Environment variable: package name}
 \usage{
 env_package_name()
 }
 \value{
-
+[\link{character}] Package name
 }
 \description{
-Environment variable value: package name
+Environment variable: package name
 }
 \examples{
 env_package_name()

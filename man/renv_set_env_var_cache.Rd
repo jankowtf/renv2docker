@@ -12,3 +12,6 @@ renv_set_env_var_cache()
 \description{
 Set environment variable for \code{{renv}} cache
 }
+\examples{
+renv_set_env_var_cache()
+}

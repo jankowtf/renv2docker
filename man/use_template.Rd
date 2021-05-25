@@ -10,16 +10,39 @@ use_template(
   data = list(),
   ignore = FALSE,
   open = FALSE,
-  package = "usethis"
+  package = pkgload::pkg_name()
 )
 }
 \arguments{
-\item{package}{}
+\item{template}{[\link{character}] File name of template (within
+\verb{./inst/templates/} or \verb{templates/} for the built package)}
+
+\item{save_as}{[\link{character}] File name of the resulting file}
+
+\item{data}{[\link{list}] Data to pass on to template (names need to match
+placeholder)}
+
+\item{ignore}{[\link{logical}]
+\itemize{
+\item \code{TRUE}: add to \code{.Rbuildignore}
+\item \code{FALSE}: do nothing
+}}
+
+\item{open}{[\link{logical}]
+\itemize{
+\item \code{TRUE}: open the file in the IDE
+\item \code{FALSE}: do nothing
+}}
+
+\item{package}{[\link{character}] Package name}
 }
 \value{
 
 }
 \description{
 Motivated by \link[usethis:use_template]{usethis::use_template}, but needed to be liberated from
-always using \link[usethis:proj_utils]{usethis::proj_path}.
+always using \link[usethis:proj_utils]{usethis::proj_path} as hard-coded directory.
+}
+\examples{
+use_template("Dockerfile", save_as = tempfile())
 }

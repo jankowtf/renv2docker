@@ -13,3 +13,6 @@
 Single-source-of-truth encapsulation of internal settings for
 \code{{renv}} directory.
 }
+\examples{
+.env_dir_renv()
+}

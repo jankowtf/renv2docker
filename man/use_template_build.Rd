@@ -21,3 +21,6 @@ use_template_build(dir = here::here(), open = rlang::is_interactive())
 \description{
 Use build template
 }
+\examples{
+use_template_build(dir = tempdir())
+}

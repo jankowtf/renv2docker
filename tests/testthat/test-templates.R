@@ -41,7 +41,7 @@ test_that("Template: Dockerfile", {
 })
 
 test_that("Template: Dockerfile: dep manager", {
-    actual <- use_template_dockerfile_dep_manager(
+    actual <- use_template_dockerfile_dcm(
         dir = if (rlang::is_interactive()) {
             test_path("test_fixtures")
         } else {

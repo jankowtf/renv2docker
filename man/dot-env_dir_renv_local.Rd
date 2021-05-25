@@ -13,3 +13,6 @@
 Single-source-of-truth encapsulation of internal settings for
 \code{{renv}} directory where tar.gz of the current package is persisted
 }
+\examples{
+.env_dir_renv_local()
+}

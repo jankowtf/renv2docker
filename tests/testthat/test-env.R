@@ -35,8 +35,8 @@ test_that("Package port", {
 
 # Dependency manager name -------------------------------------------------
 
-test_that("Dependency manager name", {
-  actual <- env_dependency_manager_name()
+test_that("DCM name", {
+  actual <- env_dcm_name()
 
   expected <- "{env_package_name()}_deps" %>%
     stringr::str_glue() %>%
@@ -71,101 +71,36 @@ test_that("{renv} version", {
 
 test_that("Write env vars to file", {
   actual <- write_env_vars()
-  expected <- list(
-    package_name = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_name",
-      class = c("fs_path",
-        "character")
-    ),
-    package_version = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_version",
-      class = c("fs_path",
-        "character")
-    ),
-    package_maintainer = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_maintainer",
-      class = c("fs_path",
-        "character")
-    ),
-    package_port = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_package_port",
-      class = c("fs_path",
-        "character")
-    ),
-    dependency_manager_name = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_dependency_manager_name",
-      class = c("fs_path",
-        "character")
-    ),
-    r_version = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_r_version",
-      class = c("fs_path",
-        "character")
-    ),
-    renv_version = structure(
-      "/media/janko/Shared/Code/R/Packages/renv2docker/.docker_env_renv_version",
-      class = c("fs_path",
-        "character")
-    )
+  expected <- c(
+    PACKAGE_NAME = "PACKAGE_NAME=renv2docker",
+    PACKAGE_VERSION = "PACKAGE_VERSION=0.0.0.9004",
+    PACKAGE_MAINTAINER = "PACKAGE_MAINTAINER=Janko Thyson (janko.thyson@rappster.io) [aut, cre]",
+    PACKAGE_PORT = "PACKAGE_PORT=8000",
+    R_VERSION = "R_VERSION=4.0.3",
+    RENV_VERSION = "RENV_VERSION=0.12.5",
+    DCM_NAME = "DCM_NAME=renv2docker_deps"
   )
   expect_identical(actual, expected)
 
   # Check for file existance
-  files_exist <- actual %>% purrr::map_lgl(fs::file_exists)
-  expect_true(all(files_exist))
+  expect_true(fs::file_exists(here::here(".env")))
 })
 
 test_that("Write env vars to file: alternative dir", {
   actual <- write_env_vars(dir = test_path("test_fixtures"))
-  expected <- list(
-    package_name = structure(
-      r"({test_path("test_fixtures")}/.docker_env_package_name)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    ),
-    package_version = structure(
-      r"({test_path("test_fixtures")}/.docker_env_package_version)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    ),
-    package_maintainer = structure(
-      r"({test_path("test_fixtures")}/.docker_env_package_maintainer)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    ),
-    package_port = structure(
-      r"({test_path("test_fixtures")}/.docker_env_package_port)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    ),
-    dependency_manager_name = structure(
-      r"({test_path("test_fixtures")}/.docker_env_dependency_manager_name)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    ),
-    r_version = structure(
-      r"({test_path("test_fixtures")}/.docker_env_r_version)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    ),
-    renv_version = structure(
-      r"({test_path("test_fixtures")}/.docker_env_renv_version)" %>%
-        stringr::str_glue(),
-      class = c("fs_path",
-        "character")
-    )
+  expected <- c(
+    PACKAGE_NAME = "PACKAGE_NAME=renv2docker",
+    PACKAGE_VERSION = "PACKAGE_VERSION=0.0.0.9004",
+    PACKAGE_MAINTAINER = "PACKAGE_MAINTAINER=Janko Thyson (janko.thyson@rappster.io) [aut, cre]",
+    PACKAGE_PORT = "PACKAGE_PORT=8000",
+    R_VERSION = "R_VERSION=4.0.3",
+    RENV_VERSION = "RENV_VERSION=0.12.5",
+    DCM_NAME = "DCM_NAME=renv2docker_deps"
   )
   expect_identical(actual, expected)
 
   # Check for file existance
-  files_exist <- actual %>% purrr::map_lgl(fs::file_exists)
-  expect_true(all(files_exist))
+  expect_true(fs::file_exists(test_path("test_fixtures/.env")))
 })
 
 # Internal ----------------------------------------------------------------

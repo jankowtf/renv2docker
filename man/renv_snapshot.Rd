@@ -12,3 +12,6 @@ renv_snapshot()
 \description{
 Create snapshot
 }
+\examples{
+renv_snapshot()
+}

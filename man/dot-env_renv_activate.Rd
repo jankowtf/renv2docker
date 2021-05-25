@@ -13,3 +13,6 @@
 Exists for single-source-of-truth encapsulation internal settings for
 \code{{renv}} activation script
 }
+\examples{
+.env_renv_activate()
+}

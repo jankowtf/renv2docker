@@ -1,26 +1,33 @@
 #' Use template
 #'
 #' Motivated by [usethis::use_template], but needed to be liberated from
-#' always using [usethis::proj_path].
+#' always using [usethis::proj_path] as hard-coded directory.
 #'
-#' @param template
-#' @param save_as
-#' @param data
-#' @param ignore
-#' @param open
-#' @param package
+#' @param template [[character]] File name of template (within
+#'   `./inst/templates/` or `templates/` for the built package)
+#' @param save_as [[character]] File name of the resulting file
+#' @param data [[list]] Data to pass on to template (names need to match
+#'   placeholder)
+#' @param ignore [[logical]]
+#'   - `TRUE`: add to `.Rbuildignore`
+#'   - `FALSE`: do nothing
+#' @param open [[logical]]
+#'   - `TRUE`: open the file in the IDE
+#'   - `FALSE`: do nothing
+#' @param package [[character]] Package name
 #'
 #' @return
 #' @export
 #'
 #' @examples
+#' use_template("Dockerfile", save_as = tempfile())
 use_template <- function (
     template,
     save_as = template,
     data = list(),
     ignore = FALSE,
     open = FALSE,
-    package = "usethis"
+    package = pkgload::pkg_name()
 ) {
     template_contents <- usethis:::render_template(
         template = template,
@@ -49,6 +56,9 @@ use_template <- function (
 #' @import pkgload
 #' @importFrom rlang is_interactive
 #' @export
+#'
+#' @examples
+#' use_template_build(dir = tempdir())
 use_template_build <- function(
     dir = here::here(),
     open = rlang::is_interactive()
@@ -72,6 +82,9 @@ use_template_build <- function(
         package = data$package
     )
 
+    # Info
+    usethis::ui_info("Created {path}")
+
     invisible(path)
 }
 
@@ -88,6 +101,9 @@ use_template_build <- function(
 #' @import pkgload
 #' @importFrom rlang is_interactive
 #' @export
+#'
+#' @examples
+#' use_template_dockerfile(dir = tempdir())
 use_template_dockerfile <- function(
     dir = here::here(),
     r_script = "main.R",
@@ -120,6 +136,9 @@ use_template_dockerfile <- function(
         package = data$package
     )
 
+    # Info
+    usethis::ui_info("Created {path}")
+
     invisible(path)
 }
 
@@ -136,13 +155,16 @@ use_template_dockerfile <- function(
 #' @import pkgload
 #' @importFrom rlang is_interactive
 #' @export
-use_template_dockerfile_dep_manager <- function(
+#'
+#' @examples
+#' use_template_dockerfile_dcm(dir = tempdir())
+use_template_dockerfile_dcm <- function(
     dir = here::here(),
     r_script = "main.R",
     open = rlang::is_interactive()
 ) {
     # File path to create
-    template <- "Dockerfile_dep_manager"
+    template <- "Dockerfile_dcm"
     path <- fs::path(dir, "renv/Dockerfile")
     path %>%
         fs::path_dir() %>%
@@ -170,6 +192,9 @@ use_template_dockerfile_dep_manager <- function(
         package = data$package
     )
 
+    # Info
+    usethis::ui_info("Created {path}")
+
     invisible(path)
 }
 
@@ -185,6 +210,9 @@ use_template_dockerfile_dep_manager <- function(
 #' @import pkgload
 #' @importFrom rlang is_interactive
 #' @export
+#'
+#' @examples
+#' use_template_docker_build(dir = tempdir())
 use_template_docker_build <- function(
     dir = here::here(),
     open = rlang::is_interactive()
@@ -205,6 +233,9 @@ use_template_docker_build <- function(
         package = pkgload::pkg_name()
     )
 
+    # Info
+    usethis::ui_info("Created {path}")
+
     invisible(path)
 }
 
@@ -220,6 +251,9 @@ use_template_docker_build <- function(
 #' @import pkgload
 #' @importFrom rlang is_interactive
 #' @export
+#'
+#' @examples
+#' use_template_docker_run(dir = tempdir())
 use_template_docker_run <- function(
     dir = here::here(),
     open = rlang::is_interactive()
@@ -239,6 +273,9 @@ use_template_docker_run <- function(
         open = open,
         package = pkgload::pkg_name()
     )
+
+    # Info
+    usethis::ui_info("Created {path}")
 
     invisible(path)
 }

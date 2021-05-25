@@ -4,3 +4,5 @@
 .Ruserdata
 renv/cache/
 renv/cache_docker/
+inst/doc
+docs

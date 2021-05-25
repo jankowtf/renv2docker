@@ -13,3 +13,6 @@
 Single-source-of-truth encapsulation of internal settings for
 \code{{renv}} dir for docker cache
 }
+\examples{
+.env_dir_renv_cache_docker()
+}

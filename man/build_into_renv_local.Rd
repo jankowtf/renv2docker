@@ -4,11 +4,19 @@
 \alias{build_into_renv_local}
 \title{Build into renv/local}
 \usage{
-build_into_renv_local()
+build_into_renv_local(dir = .env_dir_renv_local())
+}
+\arguments{
+\item{dir}{[\link{character}] Path to \code{local} directory withing \code{renv}.
+Defaults to \code{./renv/local}, but could be desirable to change (especially for
+unit testing)}
 }
 \value{
-
+[\link{character}] File path of .tar.gz file
 }
 \description{
-Build into directory \code{renv/local}
+Build package into directory \code{renv/local}.
+}
+\examples{
+build_into_renv_local()
 }

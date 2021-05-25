@@ -2,15 +2,15 @@
 % Please edit documentation in R/env.R
 \name{env_renv_version}
 \alias{env_renv_version}
-\title{Environment variable value: renv version}
+\title{Environment variable: renv version}
 \usage{
 env_renv_version()
 }
 \value{
-
+[\link{character}] Version of \code{{renv}}.
 }
 \description{
-Environment variable value: renv version
+Environment variable: renv version
 }
 \examples{
 env_renv_version()

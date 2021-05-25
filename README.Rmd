@@ -16,39 +16,197 @@ knitr::opts_chunk$set(
 # renv2docker
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/renv2docker)](https://CRAN.R-project.org/package=renv2docker)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/renv2docker)](https://CRAN.R-project.org/package=renv2docker)
+
 <!-- badges: end -->
 
-The goal of renv2docker is to ...
+Project-specific cache of `{renv}` dependencies in Docker workflows
+
+## Motivation
+
+Past me:
+
+1.  I wanted to use `{renv}` in combination with Docker and didn't yet know how
+    to mount my local [`{renv}`
+    cache](https://rstudio.github.io/renv/articles/renv.html#cache-1), so the
+    build process took **much** longer than I was willing to wait ;-)
+
+2.  This also happened at a time before
+    [rocker](https://hub.docker.com/u/rocker) switched to Ubuntu as the
+    underlying Linux OS (Thanks to [Eric
+    Nantz](https://twitter.com/thercast?lang=en) for pointing that out in your
+    [podcast](https://github.com/rpodcast/r_dev_projects)!).
+
+    Before that (AFAIU and AFAIR), it could happen that the compilation process
+    slightly differed between Ubuntu and Debian(?). So even though you might
+    have properly mounted your local [`{renv}`
+    cache](https://rstudio.github.io/renv/articles/renv.html#cache-1) so it was
+    available at build time, the resulting builds might have been incompatible
+    with your local Linux OS.
+
+    To be honest, I'm not sure how much of this still holds/is necessary after
+    the switch to Ubuntu, but I nevertheless liked the idea of having an
+    `{renv}` cache that is completely project-specific, so I continued building
+    this package out.
+
+    [**TODO: Investigate the rocker history, etc. so I don't tell incorrect
+    stuff here** ;-)]
+
+So I wanted to have a faster build experience and came up with this two-step
+approach:
+
+**STEP 1**
+
+Build an image that handles all of my package dependencies.
+
+It only builds the dependencies once or when it has to (that is whenever my
+`renv.lock` is updated) and caches them back to a subdirectory within my local
+package directory (`./renv/cache_docker` [TODO: or was it `./renv/cache` --\>
+review this]) for future builds.
+
+I called this image the **D**ependency **C**ache **M**anager (**DCM**).
+
+**STEP 2**
+
+Build the actual image
+
+This image get access to the locally persisted `{renv}` cache from the previous
+step as well as `./renv/local` (the place where your package's `.tar.gz` file is
+built to when you use the `build.R`; see below).
+
+It calls `renv::restore()` which uses the cache and restores your package by
+installing it from source.
 
 ## Installation
 
-You can install the released version of renv2docker from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("renv2docker")
+```{r eval=FALSE}
+remotes::install_github("rappster/renv2docker")
 ```
 
 ## Usage
 
-```{r example, eval=FALSE}
+```{r example}
 library(renv2docker)
-## basic example code
 ```
 
-## Ressources
+1.  Create the necessary environment variables for Docker
 
-- https://docs.docker.com/compose/environment-variables/
-- https://vsupalov.com/docker-arg-env-variable-guide/
-- https://stackoverflow.com/questions/19537645/get-environment-variable-value-in-dockerfile
-- [Eric Nantz R Dev Projects](https://github.com/rpodcast/r_dev_projects)
+```{r}
+write_env_vars()
+```
 
-### RStudio package manager public (RSPM)
-- https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-Public-RStudio-Package-Manager
-- https://packagemanager.rstudio.com/client/#/repos/1/overview
+Technically, they are mostly used as `ARG`s instead of `ENV`s, but at least for
+`PACKAGE_PORT` it would make sense to pass it on as e `ENV`. Still learning
+about the nitty-gritty details ;-) See [Docker ARG, ENV and .env - a Complete
+Guide](https://vsupalov.com/docker-arg-env-variable-guide/) for more details on
+this
+
+1.  Generate `./Dockerfile` and `./renv/Dockerfile`
+
+```{r}
+dockerfile <- use_template_dockerfile(open = FALSE)
+
+readLines(dockerfile) %>% cat(sep = "\n")
+```
+
+```{r}
+dockerfile <- use_template_dockerfile_dcm(open = FALSE)
+
+readLines(dockerfile) %>% cat(sep = "\n")
+```
+
+1.  Generate `build.R`
+
+This template ensures that your package is built into `./renv/local` and that
+all workflow requirements of `renv2docker` are met regarding the caching of
+package dependency builds.
+
+```{r}
+build_r <- use_template_build(open = FALSE)
+
+readLines(build_r) %>% cat(sep = "\n")
+```
+
+1.  Generate `docker_build.sh` and `docker_run.sh`
+
+```{r}
+build_build_sh <- use_template_docker_build(open = FALSE)
+
+readLines(build_build_sh) %>% cat(sep = "\n")
+```
+
+```{r}
+docker_run_sh <- use_template_docker_run(open = FALSE)
+
+readLines(docker_run_sh) %>% cat(sep = "\n")
+```
+
+1.  Modify the desired R script to be run inside the Docker container
+
+Find line
+
+    COPY inst/main.R main.R
+
+and line
+
+    CMD Rscript 'main.R'
+
+and adapt it to your setup.
+
+The default setup
+
+-   expects a file `main.R` within your `inst` directory
+-   copies that into the Docker image as file `main.R`
+-   Runs `main.R` via `Rscript`
+
+1.  Build your Docker container
+
+Open a terminal/shell within your package/project root directory and type
+
+    ./docker_build.sh
+
+1.  Run your Docker container
+
+<!-- -->
+
+    ./docker_run.sh
+
+## Shout outs
+
+This package was inspired and influenced by
+
+-   [Colin Fay: An Introduction to Docker for R
+    Users](https://colinfay.me/docker-r-reproducibility/)
+-   [ColinFay/dockerfiler](https://github.com/ColinFay/dockerfiler)
+-   [ThinkR/devindocker](https://github.com/ThinkR-open/devindocker)
+-   [Eric Nantz: R Dev Projects](https://github.com/rpodcast/r_dev_projects)
+
+My goal is to align this package as much as I can with existing workflows and
+best practices around R in combination with Docker.
 
 ## TODOs
 
-- Add functionality to add `renv/cache/` and `renv/cache_docker/` to
-`.gitignore`
+-   Learn much more about Docker ;-)
+-   Thoroughly investigate existing tooling around R and docker - especially the
+    packages and workflows mentioned in the shout outs - to see where I can
+    improve the package by better aligning it with best practices
+
+## DISCLAIMER
+
+This is another one of my "scratch your own itch" type of projects.
+
+I use Linux ([Pop!\_OS](https://pop.system76.com/)) and hence aligned `{renv}`
+and Docker workflows to that platform --\> not sure how much of it is applicable
+for MacOS or Windows
+
+Still hope it works for other developers out there as well :-)
+
+## Code of Conduct
+
+Please note that the renv2docker project is released with a [Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.

@@ -7,18 +7,18 @@ ARG  R_VERSION=4.0.3
 
 FROM rocker/r-ver:${R_VERSION}
 
-ARG R_MAINTAINER="janko.thyson@rappster.io"
-ARG R_PACKAGE_NAME
-ARG R_PACKAGE_VERSION
+ARG PACKAGE_MANAGER="janko.thyson@rappster.io"
+ARG PACKAGE_NAME
+ARG PACKAGE_VERSION
 ARG RENV_VERSION
 
-RUN echo "R_MAINTAINER: $R_MAINTAINER"
-RUN echo "R_PACKAGE_NAME: $R_PACKAGE_NAME"
-RUN echo "R_PACKAGE_VERSION: $R_PACKAGE_VERSION"
+RUN echo "PACKAGE_MANAGER: $PACKAGE_MANAGER"
+RUN echo "PACKAGE_NAME: $PACKAGE_NAME"
+RUN echo "PACKAGE_VERSION: $PACKAGE_VERSION"
 RUN echo "R_VERSION: $R_VERSION"
 RUN echo "RENV_VERSION: $RENV_VERSION"
 
-LABEL version=$R_PACKAGE_VERSION
+LABEL version=$PACKAGE_VERSION
 LABEL maintainer={{maintainer}}
 
 RUN R \
@@ -28,7 +28,7 @@ RUN R \
     -e 'remotes::install_github(renv_package)'
 
 # Copy required components for cache management ----------
-WORKDIR /dep_manager
+WORKDIR /dcm
 COPY renv.lock renv.lock
 
 # Install Linux libs ----------

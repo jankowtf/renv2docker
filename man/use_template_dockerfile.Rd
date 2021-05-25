@@ -27,3 +27,6 @@ use_template_dockerfile(
 \description{
 Use Dockerfile template
 }
+\examples{
+use_template_dockerfile(dir = tempdir())
+}

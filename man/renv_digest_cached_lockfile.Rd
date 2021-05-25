@@ -4,11 +4,18 @@
 \alias{renv_digest_cached_lockfile}
 \title{Digest cached \code{{renv}} lockfile}
 \usage{
-renv_digest_cached_lockfile()
+renv_digest_cached_lockfile(path = .env_renv_lockfile_cached())
+}
+\arguments{
+\item{path}{[\link{character}] Path to \strong{cached} \code{renv.lock} that is used by the
+depencency cached manager (DCM)}
 }
 \value{
 
 }
 \description{
 Digest cached \code{{renv}} lockfile
+}
+\examples{
+renv_digest_cached_lockfile()
 }

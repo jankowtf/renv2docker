@@ -13,3 +13,6 @@
 Exists for single-source-of-truth encapsulation of internal settings for
 \code{{renv}} lockfile
 }
+\examples{
+.env_renv_lockfile()
+}

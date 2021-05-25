@@ -1,0 +1,51 @@
+---
+title: "Dev reference"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dev}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+## Disclaimer
+
+This notebook is for internal development purposes only. 
+
+Nevertheless, I thought I'd share it in case anybody is working on similar
+things
+
+## Environment variables in shell scripts
+
+### Resources
+
+- https://stackoverflow.com/questions/19331497/set-environment-variables-from-file-of-key-value-pairs
+
+### Reading via `cat`
+
+```{bash}
+PACKAGE_NAME=$(cat <path/to/file>)
+```
+
+### Sourcing
+
+```{bash}
+source <path/to/file>
+```
+
+## Misc resources
+
+- https://docs.docker.com/compose/environment-variables/
+- https://vsupalov.com/docker-arg-env-variable-guide/
+- https://stackoverflow.com/questions/19537645/get-environment-variable-value-in-dockerfile
+
+### RStudio package manager public (RSPM)
+- https://support.rstudio.com/hc/en-us/articles/360046703913-FAQ-for-Public-RStudio-Package-Manager
+- https://packagemanager.rstudio.com/client/#/repos/1/overview

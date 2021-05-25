@@ -2,15 +2,15 @@
 % Please edit documentation in R/env.R
 \name{env_r_version}
 \alias{env_r_version}
-\title{Environment variable value: r version}
+\title{Environment variable: r version}
 \usage{
 env_r_version()
 }
 \value{
-
+[\link{character}] R version (\verb{\{major\}.\{minor\}.\{patch\}})
 }
 \description{
-Environment variable value: r version
+Relevant for cached build argument/environment variable for Docker.
 }
 \examples{
 env_r_version()

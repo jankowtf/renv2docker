@@ -1,3 +1,18 @@
+# renv2docker 0.0.0.9005
+
+New README
+
+-------------------------------------------------------------------------------
+
+# renv2docker 0.0.0.9004
+
+Parameterized docker images
+
+- Added functionality for parameterized docker 
+- Refactored environment variable creation
+
+--------------------------------------------------------------------------------
+
 # renv2docker 0.0.0.9004
 
 Templates

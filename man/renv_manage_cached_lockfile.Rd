@@ -11,10 +11,18 @@ renv_manage_cached_lockfile(
 )
 }
 \arguments{
-\item{force}{}
+\item{key_primary}{[\link{character}] Hash key for primary \code{renv.lock}}
+
+\item{key_cached}{[\link{character}] Hash key for cached \code{renv.lock}}
+
+\item{force}{[\link{logical}]
+\itemize{
+\item \code{TRUE}: force an update of the cached \code{renv.lock}
+\item \code{FALSE}: perform update only if hash keys differ
+}}
 }
 \value{
-Path to ached \code{{renv}} lockfile
+[\link{character}] Path to cached \code{{renv}} lockfile
 }
 \description{
 Manage cached \code{{renv}} lockfile

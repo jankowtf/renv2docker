@@ -1,5 +1,5 @@
 Package: renv2docker
-Title: Enhanced {renv} integration for Docker workflows
+Title: Project-specific cache of {renv} dependencies in Docker workflows
 Version: 0.0.0.9004
 Authors@R: 
     person(given = "Janko",
@@ -10,7 +10,9 @@ Description: Facilitates a two-step build process that encapsulates the
     package dependencies in a distinct image/container for cache management.
 License: MIT + file LICENSE
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -21,4 +23,6 @@ Imports:
     stringr,
     magrittr,
     devtools,
-    here
+    here,
+    logger
+VignetteBuilder: knitr

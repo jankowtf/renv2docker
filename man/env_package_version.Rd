@@ -2,15 +2,15 @@
 % Please edit documentation in R/env.R
 \name{env_package_version}
 \alias{env_package_version}
-\title{Environment variable value: package version}
+\title{Environment variable: package version}
 \usage{
 env_package_version()
 }
 \value{
-
+[\link{character}] Package version (as character to increase compatibilty)
 }
 \description{
-Environment variable value: package version
+Environment variable: package version
 }
 \examples{
 env_package_version()

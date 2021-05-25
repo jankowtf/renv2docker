@@ -2,7 +2,7 @@
 % Please edit documentation in R/env.R
 \name{env_package_maintainer}
 \alias{env_package_maintainer}
-\title{Environment variable value: package maintainer}
+\title{Environment variable: package maintainer}
 \usage{
 env_package_maintainer()
 }
@@ -10,7 +10,7 @@ env_package_maintainer()
 
 }
 \description{
-Environment variable value: package maintainer
+Environment variable: package maintainer
 }
 \examples{
 env_package_maintainer()

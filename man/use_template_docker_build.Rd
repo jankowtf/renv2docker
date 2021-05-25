@@ -21,3 +21,6 @@ use_template_docker_build(dir = here::here(), open = rlang::is_interactive())
 \description{
 Use docker-build template
 }
+\examples{
+use_template_docker_build(dir = tempdir())
+}
