@@ -79,8 +79,8 @@ use_template_build <- function(
         save_as = path,
         data = data,
         ignore = usethis:::is_package(),
-        open = open,
-        package = data$package
+        open = open
+        # package = data$package
     )
 
     # Info
@@ -133,8 +133,8 @@ use_template_dockerfile <- function(
         save_as = path,
         data = data,
         ignore = usethis:::is_package(),
-        open = open,
-        package = data$package
+        open = open
+        # package = data$package
     )
 
     # Info
@@ -189,8 +189,8 @@ use_template_dockerfile_dcm <- function(
         save_as = path,
         data = data,
         ignore = usethis:::is_package(),
-        open = open,
-        package = data$package
+        open = open
+        # package = data$package
     )
 
     # Info
@@ -230,8 +230,8 @@ use_template_docker_build <- function(
         template = template,
         save_as = path,
         ignore = usethis:::is_package(),
-        open = open,
-        package = pkgload::pkg_name()
+        open = open
+        # package = pkgload::pkg_name()
     )
 
     # Info
@@ -271,8 +271,8 @@ use_template_docker_run <- function(
         template = template,
         save_as = path,
         ignore = usethis:::is_package(),
-        open = open,
-        package = pkgload::pkg_name()
+        open = open
+        # package = pkgload::pkg_name()
     )
 
     # Info

@@ -10,7 +10,7 @@ use_template(
   data = list(),
   ignore = FALSE,
   open = FALSE,
-  package = pkgload::pkg_name()
+  package = .env_package_name()
 )
 }
 \arguments{
