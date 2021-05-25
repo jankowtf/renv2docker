@@ -6,6 +6,7 @@ New README
 `usethis:::ppackage_data()`. Still not a reliable base, though, as this is still
 an internal function => TODO: get rid of this dependency
 - Fixed: use `renv2docker` instead of local package when generating templates
+- Fixed: env vars in `.env` now quoted
 
 -------------------------------------------------------------------------------
 

@@ -170,7 +170,7 @@ write_env_vars <- function(
         RENV_VERSION = env_renv_version(),
         DCM_NAME = env_dcm_name()
     ) %>%
-        purrr::imap_chr(~"{.y}={.x}" %>% stringr::str_glue())
+        purrr::imap_chr(~"{.y}='{.x}'" %>% stringr::str_glue())
 
     # Write
     env_vars_flat %>%
