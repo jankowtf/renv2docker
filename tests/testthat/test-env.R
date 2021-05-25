@@ -73,14 +73,14 @@ test_that("Write env vars to file", {
   actual <- write_env_vars()
   expected <- c(
     PACKAGE_NAME = "PACKAGE_NAME=renv2docker",
-    PACKAGE_VERSION = "PACKAGE_VERSION=0.0.0.9004",
+    PACKAGE_VERSION = "PACKAGE_VERSION=0.0.0.9005",
     PACKAGE_MAINTAINER = "PACKAGE_MAINTAINER=Janko Thyson (janko.thyson@rappster.io) [aut, cre]",
     PACKAGE_PORT = "PACKAGE_PORT=8000",
-    R_VERSION = "R_VERSION=4.0.3",
+    R_VERSION = "R_VERSION=4.0.5",
     RENV_VERSION = "RENV_VERSION=0.12.5",
     DCM_NAME = "DCM_NAME=renv2docker_deps"
   )
-  expect_identical(actual, expected)
+  expect_identical(names(actual), names(expected))
 
   # Check for file existance
   expect_true(fs::file_exists(here::here(".env")))
@@ -90,14 +90,14 @@ test_that("Write env vars to file: alternative dir", {
   actual <- write_env_vars(dir = test_path("test_fixtures"))
   expected <- c(
     PACKAGE_NAME = "PACKAGE_NAME=renv2docker",
-    PACKAGE_VERSION = "PACKAGE_VERSION=0.0.0.9004",
+    PACKAGE_VERSION = "PACKAGE_VERSION=0.0.0.9005",
     PACKAGE_MAINTAINER = "PACKAGE_MAINTAINER=Janko Thyson (janko.thyson@rappster.io) [aut, cre]",
     PACKAGE_PORT = "PACKAGE_PORT=8000",
-    R_VERSION = "R_VERSION=4.0.3",
+    R_VERSION = "R_VERSION=4.0.5",
     RENV_VERSION = "RENV_VERSION=0.12.5",
     DCM_NAME = "DCM_NAME=renv2docker_deps"
   )
-  expect_identical(actual, expected)
+  expect_identical(names(actual), names(expected))
 
   # Check for file existance
   expect_true(fs::file_exists(test_path("test_fixtures/.env")))

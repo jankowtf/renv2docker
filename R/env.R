@@ -32,7 +32,8 @@ env_package_version <- function() {
 #' @examples
 #' env_package_maintainer()
 env_package_maintainer <- function() {
-    usethis:::project_data() %>%
+    # usethis:::project_data() %>%
+    usethis:::package_data() %>%
         purrr::pluck("Authors@R") %>%
         rlang::parse_expr() %>%
         rlang::eval_tidy() %>%

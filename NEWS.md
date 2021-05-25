@@ -2,6 +2,10 @@
 
 New README
 
+- Fixed: switched from `usethis:::project_data()` to
+`usethis:::ppackage_data()`. Still not a reliable base, though, as this is still
+an internal function => TODO: get rid of this dependency
+
 -------------------------------------------------------------------------------
 
 # renv2docker 0.0.0.9004

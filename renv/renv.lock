@@ -457,6 +457,11 @@
       "Repository": "CRAN",
       "Hash": "5c0cdb37f063c58cdab3c7e9fbb8bd2c"
     },
+    "renv2docker": {
+      "Package": "renv2docker",
+      "Version": "0.0.0.9004",
+      "Source": "Local"
+    },
     "renvx": {
       "Package": "renvx",
       "Version": "0.0.0.9003",

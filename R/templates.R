@@ -68,7 +68,7 @@ use_template_build <- function(
     path <- fs::path(dir, template)
 
     # Data to populate template with
-    # data <- usethis:::project_data()
+    # data <- usethis:::package_data()
     data <- list()
     data$package <- pkgload::pkg_name()
 
@@ -114,7 +114,7 @@ use_template_dockerfile <- function(
     path <- fs::path(dir, template)
 
     # Data to populate template with
-    data <- usethis:::project_data()
+    data <- usethis:::package_data()
     names(data) <- names(data) %>% tolower()
     data$maintainer <- data$`authors@r` %>%
         rlang::parse_expr() %>%
@@ -171,7 +171,7 @@ use_template_dockerfile_dcm <- function(
         fs::dir_create()
 
     # Data to populate template with
-    data <- usethis:::project_data()
+    data <- usethis:::package_data()
     names(data) <- names(data) %>% tolower()
     data$maintainer <- data$`authors@r` %>%
         rlang::parse_expr() %>%
