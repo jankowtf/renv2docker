@@ -1,3 +1,7 @@
+.env_package_name <- function() {
+    "renv2docker"
+}
+
 #' Environment variable: package name
 #'
 #' @return [[character]] Package name

@@ -27,7 +27,8 @@ use_template <- function (
     data = list(),
     ignore = FALSE,
     open = FALSE,
-    package = pkgload::pkg_name()
+    # package = pkgload::pkg_name()
+    package = .env_package_name()
 ) {
     template_contents <- usethis:::render_template(
         template = template,
